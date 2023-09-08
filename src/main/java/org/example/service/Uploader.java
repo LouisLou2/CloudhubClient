@@ -84,20 +84,24 @@ public class Uploader {
             e.printStackTrace();
         }
         PutObjectRequest obsReq=new PutObjectRequest();
-        obsReq.setBucketName(req.getBucketname());
-        obsReq.setObjectKey(req.getObjectKey());
+        //流式上传时，必须设置content-length才能正确上传
         ObjectMetadata data=new ObjectMetadata();
         data.setContentLength(fileSize);
         obsReq.setMetadata(data);
+        //设置基本信息
         obsReq.setInput(fis);
-
+        obsReq.setBucketName(req.getBucketname());
+        obsReq.setObjectKey(req.getObjectKey());
+        //设置进度监听
         obsReq.setProgressListener(new ProgressListener() {
             @Override
             public void progressChanged(ProgressStatus status) {
                 ProgressBarController.UpdateProgress(status.getAverageSpeed(), status.getTransferPercentage());
             }
         });
+        //设置进度监听的回调间隔，单位为字节，这里是1M，后期可以根据文件大小动态调整(unfinished)
         obsReq.setProgressInterval(1024*1024L);
+        //execute
         client.putObject(obsReq);
     }
 }

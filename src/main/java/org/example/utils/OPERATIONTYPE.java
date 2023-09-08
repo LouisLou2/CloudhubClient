@@ -1,6 +1,9 @@
 package org.example.utils;
 
 public enum OPERATIONTYPE{
+    LOGIN("/login"),
+    LOGOUT("/logout"),
+    SIGNUP("/signup"),
     DOWNLOAD("/download"),
     UPLOAD("/upload"),
     DELETE("/delete"),

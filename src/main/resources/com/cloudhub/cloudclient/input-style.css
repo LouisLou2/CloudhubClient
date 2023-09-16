@@ -1,0 +1,26 @@
+.styled-button {
+    -fx-background-color: #00d5fa;
+    -fx-text-fill: white;
+    -fx-font-weight: 900;
+    -fx-padding: 8px 20px;
+    -fx-background-radius: 4px;
+    -fx-border-width: 0;
+    -fx-cursor: hand;
+}
+
+.styled-text-area {
+    -fx-border-color: currentColor;
+    -fx-padding: 12px 16px;
+    -fx-color: #212121;
+    -fx-background-color: transparent;
+    -fx-border-radius: 4px;
+    -fx-font-weight: 300;
+    -fx-font-size: 14px;
+    -fx-background-radius: 4px;
+}
+
+.styled-vbox {
+    -fx-background-color: white;
+    -fx-padding: 32px;
+    -fx-spacing: 50px; /* 设置组件之间的间距 */
+}

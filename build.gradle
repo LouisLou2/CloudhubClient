@@ -1,24 +1,51 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
+group 'com.cloudhub'
+version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    junitVersion = '5.7.1'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+application {
+    mainModule = 'com.cloudhub.cloudclient'
+    mainClass = 'com.cloudhub.cloudclient.HelloApplication'
+}
+
+javafx {
+    version = '17-ea+11'
+    modules = ['javafx.controls', 'javafx.fxml',"javafx.web"]
+}
+
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
-    // https://mvnrepository.com/artifact/com.huaweicloud/esdk-obs-java-bundle
+
+    implementation 'com.jfoenix:jfoenix:9.0.10'
+
     implementation group: 'com.huaweicloud', name: 'esdk-obs-java-bundle', version: '3.22.12'
     implementation group: 'org.apache.httpcomponents.client5', name: 'httpclient5', version: '5.3-alpha1'
     implementation 'com.alibaba:fastjson:2.0.31'
-    // https://mvnrepository.com/artifact/commons-codec/commons-codec
     implementation group: 'commons-codec', name: 'commons-codec', version: '1.15'
-
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    implementation group: 'cn.hutool', name: 'hutool-all', version: '5.8.21'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    // https://mvnrepository.com/artifact/org.openjfx/javafx-web
+    implementation (group: 'org.openjfx', name: 'javafx-web', version: '18.0.1')
 }
 
 test {
